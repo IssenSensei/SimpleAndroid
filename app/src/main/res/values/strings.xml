@@ -3,4 +3,24 @@
     <string name="title_view">View</string>
     <string name="title_comment_list">Comments</string>
     <string name="title_post_list">Posts</string>
+    <string name="view_tab_headline">Tab1</string>
+    <string name="list_of_account_header">List of Account</string>
+    <string name="bank_account_label">Bank account</string>
+    <string name="bank_account_value">$2500.00</string>
+    <string name="cash_value">$800.00</string>
+    <string name="cash_label">Cash</string>
+    <string name="credit_card_label">Credit card</string>
+    <string name="credit_card_value">$1500.00</string>
+    <string name="total_balance_label">Total balance</string>
+    <string name="total_balance_value">$4800.00</string>
+    <string name="last_records_overview_header">Last Records Overview</string>
+    <string name="groceries_label">Groceries</string>
+    <string name="date_today">Today</string>
+    <string name="price_1">$250</string>
+    <string name="price_2">$100</string>
+    <string name="price_3">$500</string>
+    <string name="clothes_label">Clothes</string>
+    <string name="date_1">03/04/2018</string>
+    <string name="date_2">01/03/2018</string>
+    <string name="rental_label">Rental</string>
 </resources>

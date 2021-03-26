@@ -1,8 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     tools:context=".ui.view.ViewFragment">
+
+    <TextView
+        android:id="@+id/view_tab_headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_tab_headline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/list_of_account_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/list_of_account_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_tab_headline" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bank_account_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/spacing_large"
+        app:layout_constraintEnd_toStartOf="@+id/credit_card_card_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/credit_card_card_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/bank_account_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bank_account_label" />
+
+            <TextView
+                android:id="@+id/bank_account_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bank_account_value" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/credit_card_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/spacing_large"
+        app:layout_constraintEnd_toStartOf="@+id/cash_card_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bank_account_card_view"
+        app:layout_constraintTop_toBottomOf="@+id/list_of_account_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/credit_card_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/credit_card_label" />
+
+            <TextView
+                android:id="@+id/credit_card_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/credit_card_value" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cash_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/spacing_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/credit_card_card_view"
+        app:layout_constraintTop_toTopOf="@+id/credit_card_card_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cash_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cash_label" />
+
+            <TextView
+                android:id="@+id/cash_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cash_value" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/total_balance_card_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spacing_xlarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/credit_card_card_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/total_balance_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_balance_value" />
+
+            <TextView
+                android:id="@+id/total_balance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_balance_label" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/last_records_overview_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/last_records_overview_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_balance_card_view" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/groceries_card_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_xlarge"
+        android:layout_marginStart="@dimen/spacing_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/last_records_overview_header" />
+
+    <ImageView
+        android:id="@+id/groceries_image"
+        android:layout_width="@dimen/spacing_xlarge"
+        android:layout_height="@dimen/spacing_large"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@id/groceries_card_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/groceries_card_bg" />
+
+    <TextView
+        android:id="@+id/groceries_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/groceries_label"
+        app:layout_constraintBottom_toTopOf="@+id/groceries_payment_method"
+        app:layout_constraintStart_toEndOf="@id/groceries_image"
+        app:layout_constraintTop_toTopOf="@id/groceries_card_bg" />
+
+    <TextView
+        android:id="@+id/groceries_payment_method"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/credit_card_label"
+        app:layout_constraintBottom_toBottomOf="@id/groceries_card_bg"
+        app:layout_constraintStart_toEndOf="@id/groceries_image"
+        app:layout_constraintTop_toBottomOf="@+id/groceries_label" />
+
+    <TextView
+        android:id="@+id/groceries_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/date_today"
+        app:layout_constraintBottom_toTopOf="@+id/groceries_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/groceries_card_bg" />
+
+    <TextView
+        android:id="@+id/groceries_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/price_1"
+        app:layout_constraintBottom_toBottomOf="@id/groceries_card_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groceries_date" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/clothes_card_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_xlarge"
+        android:layout_marginStart="@dimen/spacing_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groceries_card_bg" />
+
+    <ImageView
+        android:id="@+id/clothes_image"
+        android:layout_width="@dimen/spacing_xlarge"
+        android:layout_height="@dimen/spacing_large"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@id/clothes_card_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/clothes_card_bg" />
+
+    <TextView
+        android:id="@+id/clothes_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/clothes_label"
+        app:layout_constraintBottom_toTopOf="@+id/clothes_payment_method"
+        app:layout_constraintStart_toEndOf="@id/clothes_image"
+        app:layout_constraintTop_toTopOf="@id/clothes_card_bg" />
+
+    <TextView
+        android:id="@+id/clothes_payment_method"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/credit_card_label"
+        app:layout_constraintBottom_toBottomOf="@id/clothes_card_bg"
+        app:layout_constraintStart_toEndOf="@id/clothes_image"
+        app:layout_constraintTop_toBottomOf="@+id/clothes_label" />
+
+    <TextView
+        android:id="@+id/clothes_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/date_1"
+        app:layout_constraintBottom_toTopOf="@+id/clothes_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/clothes_card_bg" />
+
+    <TextView
+        android:id="@+id/clothes_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/price_2"
+        app:layout_constraintBottom_toBottomOf="@id/clothes_card_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothes_date" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rental_card_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_xlarge"
+        android:layout_marginStart="@dimen/spacing_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clothes_card_bg" />
+
+    <ImageView
+        android:id="@+id/rental_image"
+        android:layout_width="@dimen/spacing_xlarge"
+        android:layout_height="@dimen/spacing_large"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/rental_card_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rental_card_bg" />
+
+    <TextView
+        android:id="@+id/rental_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/rental_label"
+        app:layout_constraintBottom_toTopOf="@+id/rental_payment_method"
+        app:layout_constraintStart_toEndOf="@id/rental_image"
+        app:layout_constraintTop_toTopOf="@id/rental_card_bg" />
+
+    <TextView
+        android:id="@+id/rental_payment_method"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/cash_label"
+        app:layout_constraintBottom_toBottomOf="@id/rental_card_bg"
+        app:layout_constraintStart_toEndOf="@id/rental_image"
+        app:layout_constraintTop_toBottomOf="@+id/rental_label" />
+
+    <TextView
+        android:id="@+id/rental_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/date_2"
+        app:layout_constraintBottom_toTopOf="@+id/rental_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rental_card_bg" />
+
+    <TextView
+        android:id="@+id/rental_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/over_default_card_elevation"
+        android:text="@string/price_3"
+        app:layout_constraintBottom_toBottomOf="@id/rental_card_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rental_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
