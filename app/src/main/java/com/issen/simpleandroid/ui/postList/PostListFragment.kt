@@ -1,4 +1,4 @@
-package com.issen.simpleandroid.ui.dashboard
+package com.issen.simpleandroid.ui.postList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.issen.simpleandroid.R
 
-class DashboardFragment : Fragment() {
+class PostListFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var postListViewModel: PostListViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        postListViewModel =
+                ViewModelProvider(this).get(PostListViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_post_list, container, false)
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        postListViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

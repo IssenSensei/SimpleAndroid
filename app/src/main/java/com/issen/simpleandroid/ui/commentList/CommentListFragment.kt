@@ -1,4 +1,4 @@
-package com.issen.simpleandroid.ui.home
+package com.issen.simpleandroid.ui.commentList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.issen.simpleandroid.R
 
-class HomeFragment : Fragment() {
+class CommentListFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var commentListViewModel: CommentListViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        commentListViewModel =
+                ViewModelProvider(this).get(CommentListViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_comment_list, container, false)
+        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        commentListViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
