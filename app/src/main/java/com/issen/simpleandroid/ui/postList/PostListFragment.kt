@@ -22,10 +22,7 @@ class PostListFragment : Fragment() {
         postListViewModel =
                 ViewModelProvider(this).get(PostListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_post_list, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        postListViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         return root
     }
 }
