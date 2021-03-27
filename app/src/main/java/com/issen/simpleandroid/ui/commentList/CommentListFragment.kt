@@ -8,11 +8,17 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.issen.simpleandroid.R
+import com.issen.simpleandroid.SimpleAndroidApplication
 import com.issen.simpleandroid.ui.MainActivityViewModel
+import com.issen.simpleandroid.ui.MainActivityViewModelFactory
 
 class CommentListFragment : Fragment() {
 
-    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory(
+            (requireActivity().application as SimpleAndroidApplication).repository
+        )
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,

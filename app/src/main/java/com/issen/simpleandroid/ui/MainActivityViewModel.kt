@@ -4,8 +4,11 @@ import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.issen.simpleandroid.data.Repository
+import kotlinx.coroutines.launch
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityViewModel(private val repository: Repository) : ViewModel() {
 
     private val _timerValue = MutableLiveData<Int>()
     val timerValue: LiveData<Int>
@@ -14,6 +17,8 @@ class MainActivityViewModel : ViewModel() {
     private val _isCounting = MutableLiveData<Boolean>()
     val isCounting: LiveData<Boolean>
         get() = _isCounting
+
+    var postList = repository.postList
 
     private val timer = object : CountDownTimer(60000, 1000) {
         override fun onTick(millisecondsToFinish: Long) {
@@ -29,7 +34,14 @@ class MainActivityViewModel : ViewModel() {
         _isCounting.value = false
     }
 
-    fun startTimer() {
+    fun startQuery() {
+        startTimer()
+        viewModelScope.launch {
+            repository.getPosts()
+        }
+    }
+
+    private fun startTimer() {
         timer.start()
         _isCounting.value = true
     }

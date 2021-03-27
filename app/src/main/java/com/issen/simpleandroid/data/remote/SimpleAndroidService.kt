@@ -5,7 +5,7 @@ import retrofit2.http.GET
 interface SimpleAndroidService {
 
     @GET("users/1/posts")
-    suspend fun getPosts(): NetworkPostContainer
+    suspend fun getPosts(): List<NetworkPost>
 
     @GET("posts/1/comments")
     suspend fun getComments(): NetworkCommentContainer

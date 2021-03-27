@@ -30,11 +30,12 @@
                 android:id="@+id/refresh_posts_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> viewModel.startTimer()}"
-                android:visibility="@{viewModel.isCounting ? View.GONE : View.VISIBLE}"
-                android:text="@string/update_posts" />
+                android:onClick="@{() -> viewModel.startQuery()}"
+                android:text="@string/update_posts"
+                android:visibility="@{viewModel.isCounting ? View.GONE : View.VISIBLE}" />
 
             <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -45,6 +46,7 @@
             android:id="@+id/post_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -2,14 +2,8 @@ package com.issen.simpleandroid.data.remote
 
 import com.issen.simpleandroid.data.domain.Comment
 import com.issen.simpleandroid.data.domain.Photo
-import com.issen.simpleandroid.data.domain.Post
 import com.issen.simpleandroid.data.local.LocalPost
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
-data class NetworkPostContainer(val posts: List<NetworkPost>)
-
-@JsonClass(generateAdapter = true)
 data class NetworkPost(
     val userId: Int,
     val id: Int,
@@ -17,10 +11,8 @@ data class NetworkPost(
     val body: String
 )
 
-@JsonClass(generateAdapter = true)
 data class NetworkCommentContainer(val comments: List<NetworkComment>)
 
-@JsonClass(generateAdapter = true)
 data class NetworkComment(
     val postId: Int,
     val id: Int,
@@ -29,10 +21,8 @@ data class NetworkComment(
     val body: String,
 )
 
-@JsonClass(generateAdapter = true)
 data class NetworkPhotoContainer(val photos: List<NetworkPhoto>)
 
-@JsonClass(generateAdapter = true)
 data class NetworkPhoto(
     val albumId: Int,
     val id: Int,
@@ -40,18 +30,6 @@ data class NetworkPhoto(
     val url: String,
     val thumbnail: String,
 )
-
-
-fun NetworkPostContainer.asDomainModel(): List<Post> {
-    return posts.map {
-        Post(
-            it.userId,
-            it.id,
-            it.title,
-            it.body
-        )
-    }
-}
 
 fun NetworkCommentContainer.asDomainModel(): List<Comment> {
     return comments.map {
@@ -78,9 +56,8 @@ fun NetworkPhotoContainer.asDomainModel(): List<Photo> {
 }
 
 
-
-fun NetworkPostContainer.asDatabaseModel(): List<LocalPost> {
-    return posts.map {
+fun List<NetworkPost>.asDatabaseModel(): List<LocalPost>{
+    return map {
         LocalPost(
             it.userId,
             it.id,
