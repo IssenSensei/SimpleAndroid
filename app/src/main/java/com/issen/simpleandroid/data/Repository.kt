@@ -1,17 +1,23 @@
 package com.issen.simpleandroid.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.issen.simpleandroid.data.domain.Feed
 import com.issen.simpleandroid.data.domain.Post
 import com.issen.simpleandroid.data.local.LocalPostDao
 import com.issen.simpleandroid.data.local.asDomainModel
+import com.issen.simpleandroid.data.remote.NetworkComment
+import com.issen.simpleandroid.data.remote.NetworkPhoto
 import com.issen.simpleandroid.data.remote.SimpleAndroidApi.simpleAndroidService
 import com.issen.simpleandroid.data.remote.asDatabaseModel
 import com.issen.simpleandroid.data.remote.asDomainModel
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import java.util.concurrent.TimeUnit
 
 class Repository(private val localPostDao: LocalPostDao) {
 
@@ -19,24 +25,35 @@ class Repository(private val localPostDao: LocalPostDao) {
         it.asDomainModel()
     }
 
+    val feedList = MutableLiveData<List<Feed>>()
+
     suspend fun getPosts() {
         withContext(Dispatchers.IO) {
             localPostDao.insert(simpleAndroidService.getPosts().asDatabaseModel())
         }
     }
 
-    suspend fun updateFeed(): MutableList<Feed> {
+    fun updateFeed() {
         val feedItems = mutableListOf<Feed>()
-        withContext(Dispatchers.IO) {
-            simpleAndroidService.getPhotos().forEach {
-                feedItems.add(Feed(1 to it.asDomainModel()))
-            }
-            delay(3000)
-            simpleAndroidService.getComments().forEach {
-                feedItems.add(Feed(0 to it.asDomainModel()))
-            }
-        }
-        return feedItems
+        val disposable =
+            Observable.zip(
+                simpleAndroidService.getPhotos().subscribeOn(Schedulers.io()),
+                simpleAndroidService.getComments().subscribeOn(Schedulers.io())
+                    .delay(3, TimeUnit.SECONDS),
+                { list: List<NetworkPhoto>, list1: List<NetworkComment> -> list + list1 })
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete {
+                    feedList.postValue(feedItems)
+                }
+                .subscribe { list ->
+                    list.forEach {
+                        if (it is NetworkPhoto) {
+                            feedItems.add(Feed(1 to it.asDomainModel()))
+                        } else {
+                            feedItems.add(Feed(0 to (it as NetworkComment).asDomainModel()))
+                        }
+                    }
+                }
     }
 
 }

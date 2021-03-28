@@ -24,11 +24,8 @@ class MainActivityViewModel(private val repository: Repository) : ViewModel() {
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
-    private val _feedList = MutableLiveData<List<Feed>>()
-    val feedList: LiveData<List<Feed>>
-        get() = _feedList
-
     var postList = repository.postList
+    var feedList = repository.feedList
 
     private val timer = object : CountDownTimer(60000, 1000) {
         override fun onTick(millisecondsToFinish: Long) {
@@ -66,7 +63,7 @@ class MainActivityViewModel(private val repository: Repository) : ViewModel() {
 
     private fun updateFeed() {
         viewModelScope.launch {
-            _feedList.value = repository.updateFeed()
+            repository.updateFeed()
             _isRefreshing.value = false
         }
     }

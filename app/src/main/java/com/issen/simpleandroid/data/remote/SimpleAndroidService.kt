@@ -1,5 +1,6 @@
 package com.issen.simpleandroid.data.remote
 
+import io.reactivex.Observable
 import retrofit2.http.GET
 
 interface SimpleAndroidService {
@@ -8,8 +9,8 @@ interface SimpleAndroidService {
     suspend fun getPosts(): List<NetworkPost>
 
     @GET("posts/1/comments")
-    suspend fun getComments(): List<NetworkComment>
+    fun getComments(): Observable<List<NetworkComment>>
 
     @GET("albums/1/photos")
-    suspend fun getPhotos(): List<NetworkPhoto>
+    fun getPhotos(): Observable<List<NetworkPhoto>>
 }
