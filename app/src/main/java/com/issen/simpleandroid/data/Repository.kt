@@ -21,11 +21,18 @@ import java.util.concurrent.TimeUnit
 
 class Repository(private val localPostDao: LocalPostDao) {
 
+    val hasDataDownloadErrorOccurred = MutableLiveData<Boolean>()
+
+    init {
+        hasDataDownloadErrorOccurred.value = false
+    }
+
     val postList: LiveData<List<Post>> = Transformations.map(localPostDao.getLocalPosts()) {
         it.asDomainModel()
     }
 
     val feedList = MutableLiveData<List<Feed>>()
+
 
     suspend fun getPosts() {
         withContext(Dispatchers.IO) {
@@ -45,7 +52,7 @@ class Repository(private val localPostDao: LocalPostDao) {
                 .doOnComplete {
                     feedList.postValue(feedItems)
                 }
-                .subscribe { list ->
+                .subscribe({ list ->
                     list.forEach {
                         if (it is NetworkPhoto) {
                             feedItems.add(Feed(1 to it.asDomainModel()))
@@ -53,7 +60,13 @@ class Repository(private val localPostDao: LocalPostDao) {
                             feedItems.add(Feed(0 to (it as NetworkComment).asDomainModel()))
                         }
                     }
-                }
+                }, {
+                    hasDataDownloadErrorOccurred.postValue(true)
+                })
+    }
+
+    fun clearError() {
+        hasDataDownloadErrorOccurred.value = false
     }
 
 }
