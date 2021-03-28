@@ -8,8 +8,8 @@ interface SimpleAndroidService {
     suspend fun getPosts(): List<NetworkPost>
 
     @GET("posts/1/comments")
-    suspend fun getComments(): NetworkCommentContainer
+    suspend fun getComments(): List<NetworkComment>
 
     @GET("albums/1/photos")
-    suspend fun getPhotos(): NetworkPhotoContainer
+    suspend fun getPhotos(): List<NetworkPhoto>
 }

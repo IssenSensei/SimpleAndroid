@@ -11,8 +11,6 @@ data class NetworkPost(
     val body: String
 )
 
-data class NetworkCommentContainer(val comments: List<NetworkComment>)
-
 data class NetworkComment(
     val postId: Int,
     val id: Int,
@@ -21,42 +19,35 @@ data class NetworkComment(
     val body: String,
 )
 
-data class NetworkPhotoContainer(val photos: List<NetworkPhoto>)
-
 data class NetworkPhoto(
     val albumId: Int,
     val id: Int,
     val title: String,
     val url: String,
-    val thumbnail: String,
+    val thumbnailUrl: String,
 )
 
-fun NetworkCommentContainer.asDomainModel(): List<Comment> {
-    return comments.map {
-        Comment(
-            it.postId,
-            it.id,
-            it.name,
-            it.email,
-            it.body
-        )
-    }
+fun NetworkComment.asDomainModel(): Comment {
+    return Comment(
+        postId,
+        id,
+        name,
+        email,
+        body
+    )
 }
 
-fun NetworkPhotoContainer.asDomainModel(): List<Photo> {
-    return photos.map {
-        Photo(
-            it.albumId,
-            it.id,
-            it.title,
-            it.url,
-            it.thumbnail
-        )
-    }
+fun NetworkPhoto.asDomainModel(): Photo {
+    return Photo(
+        albumId,
+        id,
+        title,
+        url,
+        thumbnailUrl
+    )
 }
 
-
-fun List<NetworkPost>.asDatabaseModel(): List<LocalPost>{
+fun List<NetworkPost>.asDatabaseModel(): List<LocalPost> {
     return map {
         LocalPost(
             it.userId,

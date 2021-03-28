@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SimpleAndroid</string>
     <string name="title_view">View</string>
-    <string name="title_comment_list">Comments</string>
+    <string name="title_feed_list">Feed</string>
     <string name="title_post_list">Posts</string>
     <string name="view_tab_headline">Tab1</string>
     <string name="list_of_account_header">List of Account</string>

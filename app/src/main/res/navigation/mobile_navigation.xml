@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_comment_list">
+    app:startDestination="@+id/navigation_feed_list">
 
     <fragment
         android:id="@+id/navigation_view"
@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_view" />
 
     <fragment
-        android:id="@+id/navigation_comment_list"
-        android:name="com.issen.simpleandroid.ui.commentList.CommentListFragment"
-        android:label="@string/title_comment_list"
-        tools:layout="@layout/fragment_comment_list" />
+        android:id="@+id/navigation_feed_list"
+        android:name="com.issen.simpleandroid.ui.feedList.FeedListFragment"
+        android:label="@string/title_feed_list"
+        tools:layout="@layout/fragment_feed_list" />
 
     <fragment
         android:id="@+id/navigation_post_list"
